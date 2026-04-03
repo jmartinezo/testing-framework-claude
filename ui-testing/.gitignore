@@ -9,6 +9,7 @@ reports/playwright-report/
 reports/allure-results/
 reports/test-results/
 reports/screenshots/
+allure-results/
 
 # Playwright
 playwright/.auth/
