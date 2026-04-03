@@ -1,0 +1,24 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno
+.env
+
+# Reportes generados
+reports/playwright-report/
+reports/allure-results/
+reports/test-results/
+reports/screenshots/
+
+# Playwright
+playwright/.auth/
+
+# TypeScript
+dist/
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
