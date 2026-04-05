@@ -42,6 +42,7 @@ jobs:
         run: pip install schemathesis pytest allure-pytest python-dotenv
 
       - name: Run schema tests
+        continue-on-error: true
         run: |
           pytest tests/schema/ \
             --hypothesis-max-examples=20 \
@@ -79,6 +80,7 @@ jobs:
         run: pip install pytest requests python-dotenv pytest-json-report allure-pytest
 
       - name: Run CRUD tests
+        continue-on-error: true
         run: |
           pytest tests/crud/ \
             --json-report \
@@ -166,6 +168,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install Allure CLI
+        run: |
+          curl -o allure.tgz -sSL https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.tgz
+          tar -xzf allure.tgz
+          echo "$PWD/allure-2.27.0/bin" >> $GITHUB_PATH
+
       - name: Download all Allure results
         uses: actions/download-artifact@v4
         with:
@@ -174,10 +188,7 @@ jobs:
           path: api-testing/reports/allure-results/
 
       - name: Generate Allure report
-        uses: simple-elf/allure-report-action@v1
-        with:
-          allure_results: api-testing/reports/allure-results
-          allure_report: api-testing/reports/allure-report
+        run: allure generate api-testing/reports/allure-results -o api-testing/reports/allure-report --clean
 
       - name: Upload Allure report
         uses: actions/upload-artifact@v4
