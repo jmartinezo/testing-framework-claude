@@ -54,14 +54,14 @@ jobs:
         if: always()
         with:
           name: playwright-smoke-report
-          path: ui-testing/reports/playwright-report/
+          path: reports/playwright-report/
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-test-results
-          path: ui-testing/reports/test-results/
+          path: reports/test-results/
 
   e2e-tests:
     name: E2E Tests
