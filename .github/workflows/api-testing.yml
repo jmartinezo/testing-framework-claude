@@ -39,7 +39,7 @@ jobs:
           cache-dependency-path: api-testing/pyproject.toml
 
       - name: Install dependencies
-        run: pip install schemathesis pytest allure-pytest
+        run: pip install schemathesis pytest allure-pytest python-dotenv
 
       - name: Run schema tests
         run: |
